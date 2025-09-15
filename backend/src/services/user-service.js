@@ -28,18 +28,10 @@ const addNewUser = async (userData) => {
 };
 
 const loginUser = async (email, password) => {
-  try {
-    const user = await User.findEmailAndPasswordForAuth(email, password);
-    console.log(`User with id: ${user._id} logged in successfully`);
-    const token = await user.generateToken();
-    return { user, token };
-  } catch (err) {
-    console.error(`Error logging in user: ${err.message}`);
-    if (err instanceof InputValidationException) {
-      throw err;
-    }
-    throw new InputValidationException(err.message);
-  }
+  const user = await User.findEmailAndPasswordForAuth(email, password);
+  console.log(`User with id: ${user._id} logged in successfully`);
+  const token = await user.generateToken();
+  return { user, token };
 };  
 
 module.exports = { addNewUser , loginUser};

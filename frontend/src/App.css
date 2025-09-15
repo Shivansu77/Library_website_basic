@@ -1,38 +1,101 @@
+@import url('https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css');
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-section{
+  padding: 3vh 10%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Login Form Styles */
+section {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
+}
+
+.login-title {
+  margin-bottom: 1.5rem;
+  color: #2185d0;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.ui.form {
+  width: 100%;
+  max-width: 450px;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.ui.form .field {
+  margin-bottom: 1.5rem;
+}
+
+.ui.form .field label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.ui.form input[type="email"],
+.ui.form input[type="password"] {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.ui.form input[type="email"]:focus,
+.ui.form input[type="password"]:focus {
+  border-color: #2185d0;
+  outline: none;
+}
+
+.ui.button {
+  margin-top: 1rem;
+  width: 100%;
+  background-color: #2185d0;
   color: white;
+  padding: 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+.ui.button:hover {
+  background-color: #1678c2;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ui.message {
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 1rem;
+}
+
+.login-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.login-footer p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.login-footer a {
+  color: #2185d0;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
 }

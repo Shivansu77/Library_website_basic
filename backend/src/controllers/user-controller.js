@@ -12,7 +12,7 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: 'Please provide email and password' });
         }
         
-        // Use the service to login the user
+        // Use the service to authenticate the user
         const result = await userService.loginUser(email, password);
         
         // Return the user and token
