@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, FormField, Button } from 'semantic-ui-react';
+import { Form, FormField, Button, Checkbox } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { LibraryApplicationbackend } from '../apis/LibraryApplicationbackend';
 
@@ -8,9 +8,20 @@ const SignupScreen = () => {
     firstName: "",
     lastName: "",
     email: "",
-    password: ""
+    password: "",
+    type: "STUDENT"
   });
   const navigate = useNavigate();
+
+  const signUpUser = async (userData) => {
+    try {
+      const response = await LibraryApplicationbackend.post('/users/signup', userData);
+      return response.data.user;
+    } catch (error) {
+      throw new Error('Signup failed. Please try again.');
+    }
+  };
+  
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
@@ -18,14 +29,14 @@ const SignupScreen = () => {
     
     if (validateUserDetails()) {
       try {
-        const newUser = await LibraryApplicationbackend.registerUser(userDetails);
-        console.log('User registered successfully:', newUser);
-        
-        // Navigate to login page after successful registration
-        navigate('/login');
+        const user = await signUpUser(userDetails);
+        if(user.type === "LIBRARIAN"){
+          navigate('/librarian');
+      } else {
+          navigate('/student');
+      }      
       } catch (error) {
-        console.error('Registration failed:', error);
-        // Handle error (show error message to user)
+        console.error('Signup error:', error);
       }
     }
   };
@@ -97,6 +108,21 @@ const SignupScreen = () => {
             required
           />
         </FormField>
+        
+        <Form.Field>
+        <Checkbox
+            toggle
+            name="type"
+            label="Are you a Librarian?"
+            checked={userDetails.type === "LIBRARIAN"}
+            onChange={(e, { checked }) => 
+              setUserDetails(prev => ({ 
+                ...prev, 
+                type: checked ? "LIBRARIAN" : "STUDENT" 
+              }))
+              }/>
+
+        </Form.Field>
 
         <Button type='submit' primary>Sign Up</Button>
         
